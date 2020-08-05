@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const Users = require("../models/user-model");
 const { userNameExists, validateUser } = require("../middleware/index");
 
-router.get("/", async (req, res, next) => {
+router.get("/users", async (req, res, next) => {
   try {
     res.json(await Users.allUsers());
   } catch (error) {
@@ -12,7 +12,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.post("/", userNameExists, async (req, res, next) => {
+router.post("/register", userNameExists, async (req, res, next) => {
   try {
     const { username, password } = req.body;
     const newUser = await Users.add({
@@ -26,7 +26,7 @@ router.post("/", userNameExists, async (req, res, next) => {
   }
 });
 
-router.get("/:id", validateUser, (req, res, next) => {
+router.get("/user/:id", validateUser, (req, res, next) => {
   try {
     res.json(req.user);
   } catch (error) {

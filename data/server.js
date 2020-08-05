@@ -8,7 +8,7 @@ server.use(helmet());
 server.use(cors());
 server.use(express.json());
 
-server.use("/api/users", UserRouter);
+server.use("/api/", UserRouter);
 
 server.use("/", (req, res) => {
   res.json({ api: "🚀 Up and running... 🚀" });
