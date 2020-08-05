@@ -2,10 +2,13 @@ const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 const server = express();
+const UserRouter = require("../routes/user-router");
 
 server.use(helmet());
 server.use(cors());
 server.use(express.json());
+
+server.use("/api/users", UserRouter);
 
 server.use("/", (req, res) => {
   res.json({ api: "🚀 Up and running... 🚀" });
