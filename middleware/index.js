@@ -44,7 +44,7 @@ const validateUsername = async (req, res, next) => {
 
 const sessionRequired = async (req, res, next) => {
   try {
-    if (!req.session || !req.session.user)
+    if (!req.session || !req.session.cookie)
       return res
         .status(401)
         .json({ message: "You are unable to access this resource." });

@@ -15,12 +15,20 @@ server.use(express.json());
 server.use(
   session({
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     secret: process.env.SESSION_SECRET || "keep it secret, keep it safe",
     store: new KnexSessionStore({
       knex: db,
       createTable: true,
+      clearInterval: 1000 * 60 * 30, // 30 minutes
     }),
+
+    // Setting the cookie allowed us to be able to view the data.
+    cookie: {
+      maxAge: 1000 * 60 * 10,
+      secure: false,
+      httpOnly: true,
+    },
   })
 );
 
